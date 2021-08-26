@@ -27,10 +27,11 @@ def get_product_info():
         "Referer": "https://www.tokyo-marui.co.jp/products/",
     }
 
+    
     series = [[1, 32, 2, 3, 4, 5, 6, 7, 8, 9], [29, 10, 11, 12, 13, 14],
               [15, 16, 17, 18, 19, 20, 21, 22]]  # 製品シリーズ番号、検索用
     this_series = series[0][0]
-    payload = {'series': this_series, 'srchflg': 1}  # 送るパラメータ
+    payload = {'series': this_series, 'srchflg': 1}  # パラメータ
 
     url = "https://www.tokyo-marui.co.jp/products/search/product_search.html"  # 検索ページを用いてシリーズ別製品を検索
 
@@ -39,7 +40,7 @@ def get_product_info():
 
             this_series = series[i][j]
             payload = {'series': this_series, 'srchflg': 1}
-            response = requests.get(url, headers=headers, params=payload)  # 検索結果を取る
+            response = requests.get(url, headers=headers, params=payload)  # 検索結果を取得
 
             # 役に立つ報を抽出
             all_name = re.findall('<a href="/products/(.+?)/(.+?)/(.+?)">(.+?)</a>', response.text)
@@ -70,7 +71,7 @@ def get_product_info():
 
 
 def write_csv(productinfo):
-    # ファイルを生成し、データを書き込む
+    # ファイルを作成し、データを書き込む
     print("Write to file: marui_products_information.csv")
     f = open('marui_products_information.csv', "a+", encoding='utf-8')
     f.write("name,price,category,series,id,url" + '\n')
