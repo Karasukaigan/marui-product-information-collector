@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>取扱い説明書一覧</title>
+    <style>
+        body {
+            background-color: gray;
+        }
+        .flex-container {
+            background-color: white;
+            border-radius: 10px;
+            width: 75%;
+            margin: 100px auto;
+            padding: 50px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .image-container {
+            width: 200px;
+            margin: 10px;
+        }
+
+        .image-container img {
+            width: 200px;
+            transition: transform 0.3s;
+        }
+
+        .image-container img:hover {
+            transform: scale(2);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="flex-container" id="gallery"></div>
+
+    <script>
+        var manual_info = ${manual_info};
+
+        // 加载图片到弹性盒子中
+        function loadImages(images) {
+            var gallery = document.getElementById("gallery");
+
+            images.forEach(function (image) {
+                var imageContainer = document.createElement("div");
+                imageContainer.className = "image-container";
+
+                var img = document.createElement("img");
+                img.src = image[1];
+
+                // 添加点击事件，打开对应的 PDF 文件
+                imageContainer.addEventListener("click", function () {
+                    window.open(image[0], "_blank");
+                });
+
+                imageContainer.appendChild(img);
+                gallery.appendChild(imageContainer);
+            });
+        }
+
+        // 在页面加载完成后调用加载图片的函数
+        window.addEventListener("DOMContentLoaded", function () {
+            loadImages(manual_info);
+        });
+    </script>
+
+</body>
+
+</html>

@@ -190,6 +190,8 @@ def download_pdf(product_type_name_l1, product_type_name_l2, product_name, pdf_u
         for j in range(len(product_name[i])):
             for k in range(len(product_name[i][j])):
                 num += 1
+                if os.path.exists('marui_instruction_manuals\\%s\\%s\\%s取扱い説明書.pdf' % (product_type_name_l1[i], product_type_name_l2[i][j], product_name[i][j][k])) :
+                    continue
                 pdf_f = requests.get(pdf_url[i][j][k], headers=headers)
                 f = open('marui_instruction_manuals\\%s\\%s\\%s取扱い説明書.pdf' % (
                 product_type_name_l1[i], product_type_name_l2[i][j], product_name[i][j][k]), 'wb')
