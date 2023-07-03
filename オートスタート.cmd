@@ -1,5 +1,6 @@
 @echo off
 
+chcp 65001 > nul
 call venv\Scripts\activate
 python get_all_products.py
 python get_all_instruction_manuals.py

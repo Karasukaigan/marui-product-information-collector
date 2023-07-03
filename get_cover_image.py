@@ -28,6 +28,13 @@ def convert_pdf_pages_to_png(directory, page_number):
 
     for root, dirs, files in os.walk(directory):
         for file in files:
+            if file.endswith(".png"):
+                file_path = os.path.join(root, file)
+                os.remove(file_path)
+                print(f"Deleted {file_path}.")
+
+    for root, dirs, files in os.walk(directory):
+        for file in files:
             if file.endswith(".pdf"):
                 file_path = os.path.join(root, file)
                 png_path = convert_pdf_to_png(file_path, page_number, root)
@@ -35,10 +42,6 @@ def convert_pdf_pages_to_png(directory, page_number):
                 png_path = png_path.replace("\\", "\\\\")
 
                 pdf_png_mapping.append([file_path, png_path])
-            # if file.endswith(".png"):
-            #     file_path = os.path.join(root, file)
-            #     os.remove(file_path)
-            #     print(f"Deleted {file_path}.")
 
     js_array = "["
     for mapping in pdf_png_mapping:
